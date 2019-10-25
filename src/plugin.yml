@@ -1,7 +1,7 @@
 name: ExoticGarden
 version: ${project.version}
 authors: [mrCookieSlime, Goldentoenail, Joapple, SoSeDiK]
-description: A Slimefun Addon that adds new Plants and dishes to the game
+description: Дополнение к Slimefun, которое добавляет много новой растительности и еды
 website: http://TheBusyBiscuit.github.io/
 api-version: 1.13
 

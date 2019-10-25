@@ -25,13 +25,13 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 public class Kitchen extends MultiBlockMachine {
 	
-	private RecipeType recipeT = new RecipeType(new CustomItem(Material.CAULDRON, "&eKitchen", "", "&a&oThis item should be made", "&a&oin the Kitchen"), "KITCHEN");
+	private RecipeType recipeT = new RecipeType(new CustomItem(Material.CAULDRON, "&eКухня", "", "&a&oЭтот предмет должен быть", "&a&oприготовлен на кухне"), "KITCHEN");
 	private ExoticGarden plugin;
 	
 	public Kitchen(ExoticGarden plugin) {
 		super(
-			Categories.MACHINES_1, new CustomItem(Material.CAULDRON, "&eKitchen", new String[] {"", "&a&oYou can make a bunch of different yummies here!", "&a&oThe result goes in the Furnace output slot"}), "KITCHEN",
-			new ItemStack[] {new CustomItem(Material.BRICK_STAIRS, "&oBrick Stairs (upside down)"), new CustomItem(Material.BRICK_STAIRS, "&oBrick Stairs (upside down)"), new ItemStack(Material.BRICKS), new ItemStack(Material.STONE_PRESSURE_PLATE), new ItemStack(Material.IRON_TRAPDOOR), new ItemStack(Material.BOOKSHELF), new ItemStack(Material.FURNACE), new ItemStack(Material.DISPENSER), new ItemStack(Material.CRAFTING_TABLE)},
+			Categories.MACHINES_1, new CustomItem(Material.CAULDRON, "&eКухня", "", "&a&oДля приготовления всяких вкусняшек!", "&a&oРезультат появляется в печке."), "KITCHEN",
+			new ItemStack[] {new CustomItem(Material.BRICK_STAIRS, "&oКирпичные ступеньки (направлены вниз)"), new CustomItem(Material.BRICK_STAIRS, "&oКирпичные ступеньки (направлены вниз)"), new ItemStack(Material.BRICKS), new ItemStack(Material.STONE_PRESSURE_PLATE), new ItemStack(Material.IRON_TRAPDOOR), new ItemStack(Material.BOOKSHELF), new ItemStack(Material.FURNACE), new ItemStack(Material.DISPENSER), new ItemStack(Material.CRAFTING_TABLE)},
 			new ItemStack[0], 
 			Material.IRON_TRAPDOOR
 		);
@@ -39,7 +39,7 @@ public class Kitchen extends MultiBlockMachine {
 		this.plugin = plugin;
 		
 		register();
-		Slimefun.registerResearch(new Research(600, "Kitchen", 30), getItem());
+		Slimefun.registerResearch(new Research(600, "Кухня", 30), getItem());
 	}
 	
 	public RecipeType asRecipeType() {
