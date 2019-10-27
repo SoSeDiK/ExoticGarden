@@ -717,7 +717,7 @@ public class ExoticGarden extends JavaPlugin {
 		}
 
 		if (pcolor != null) {
-			new Juice(category_drinks, new CustomPotion(color + juice, pcolor, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&oВосстанавливает &b&o" + "3.0 единицы" + " &7&oголода"), juice.toUpperCase().replace(" ", "_"), RecipeType.JUICER,
+			new Juice(category_drinks, new CustomPotion(color + juice, pcolor, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&oВосстанавливает &b&o" + "3.0 единицы" + " &7&oголода"), id + "_JUICE", RecipeType.JUICER,
 			new ItemStack[] {getItem(id), null, null, null, null, null, null, null, null})
 			.register();
 		}
