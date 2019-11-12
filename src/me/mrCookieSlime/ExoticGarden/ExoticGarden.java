@@ -761,7 +761,7 @@ public class ExoticGarden extends JavaPlugin {
 
 		try {
 			new CustomFood(category_food, new CustomItem(getSkull(Material.BREAD, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGM4YTkzOTA5M2FiMWNkZTY2NzdmYWY3NDgxZjMxMWU1ZjE3ZjYzZDU4ODI1ZjBlMGMxNzQ2MzFmYjA0MzkifX19"), color + sandwichName, "", "&7&oВосстанавливает &b&o" + "8.0 единиц" + " &7&oголода"), id + "_JELLY_SANDWICH",
-			new ItemStack[] {null, new ItemStack(Material.BREAD), null, null, getItem(name.toUpperCase() + "_JUICE"), null, null, new ItemStack(Material.BREAD), null},
+			new ItemStack[] {null, new ItemStack(Material.BREAD), null, null, getItem(id.toUpperCase() + "_JUICE"), null, null, new ItemStack(Material.BREAD), null},
 			16)
 			.register();
 
