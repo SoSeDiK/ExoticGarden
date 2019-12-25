@@ -18,7 +18,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomPotion;
-import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
 import me.mrCookieSlime.ExoticGarden.items.Crook;
 import me.mrCookieSlime.ExoticGarden.items.GrassSeeds;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -33,6 +32,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.BukkitUpdater;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.Updater;
@@ -79,45 +79,41 @@ public class ExoticGarden extends JavaPlugin {
 		// Only run the Updater if it has not been disabled
 		if (cfg.getBoolean("options.auto-update")) updater.start();
 
-		try {
-			category_main = new Category(new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTVhNWM0YTBhMTZkYWJjOWIxZWM3MmZjODNlMjNhYzE1ZDAxOTdkZTYxYjEzOGJhYmNhN2M4YTI5YzgyMCJ9fX0="), "&aЭкзотические растения и фрукты", "", "&a> Нажмите, чтобы открыть"));
-			category_food = new Category(new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTE0MjE2ZDEwNzE0MDgyYmJlM2Y0MTI0MjNlNmIxOTIzMjM1MmY0ZDY0ZjlhY2EzOTEzY2I0NjMxOGQzZWQifX19"), "&aЭкзотическая еда", "", "&a> Нажмите, чтобы открыть"));
-			category_drinks = new Category(new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmE4ZjFmNzBlODU4MjU2MDdkMjhlZGNlMWEyYWQ0NTA2ZTczMmI0YTUzNDVhNWVhNmU4MDdjNGIzMTNlODgifX19"), "&aЭкзотические напитки", "", "&a> Нажмите, чтобы открыть"));
-			category_magic = new Category(new CustomItem(Material.BLAZE_POWDER, "&5Магические растения", "", "&a> Нажмите, чтобы открыть"));
+		category_main = new Category(new CustomItem(SkullItem.fromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTVhNWM0YTBhMTZkYWJjOWIxZWM3MmZjODNlMjNhYzE1ZDAxOTdkZTYxYjEzOGJhYmNhN2M4YTI5YzgyMCJ9fX0="), "&aЭкзотические растения и фрукты", "", "&a> Нажмите, чтобы открыть"));
+		category_food = new Category(new CustomItem(SkullItem.fromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTE0MjE2ZDEwNzE0MDgyYmJlM2Y0MTI0MjNlNmIxOTIzMjM1MmY0ZDY0ZjlhY2EzOTEzY2I0NjMxOGQzZWQifX19"), "&aЭкзотическая еда", "", "&a> Нажмите, чтобы открыть"));
+		category_drinks = new Category(new CustomItem(SkullItem.fromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmE4ZjFmNzBlODU4MjU2MDdkMjhlZGNlMWEyYWQ0NTA2ZTczMmI0YTUzNDVhNWVhNmU4MDdjNGIzMTNlODgifX19"), "&aЭкзотические напитки", "", "&a> Нажмите, чтобы открыть"));
+		category_magic = new Category(new CustomItem(Material.BLAZE_POWDER, "&5Магические растения", "", "&a> Нажмите, чтобы открыть"));
 
-			SlimefunItemStack iceCube = new SlimefunItemStack("ICE_CUBE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM0MGJlZjJjMmMzM2QxMTNiYWM0ZTZhMWE4NGQ1ZmZjZWNiYmZhYjZiMzJmYTdhN2Y3NjE5NTQ0MmJkMWEyIn19fQ==", "&bКубик льда");
-			new SlimefunItem(Categories.MISC, iceCube, RecipeType.GRIND_STONE,
-			new ItemStack[] {new ItemStack(Material.ICE), null, null, null, null, null, null, null, null}, new CustomItem(iceCube, 4))
-			.register();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		SlimefunItemStack iceCube = new SlimefunItemStack("ICE_CUBE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM0MGJlZjJjMmMzM2QxMTNiYWM0ZTZhMWE4NGQ1ZmZjZWNiYmZhYjZiMzJmYTdhN2Y3NjE5NTQ0MmJkMWEyIn19fQ==", "&bКубик льда");
+		new SlimefunItem(Categories.MISC, iceCube, RecipeType.GRIND_STONE,
+				new ItemStack[] {new ItemStack(Material.ICE), null, null, null, null, null, null, null, null}, new CustomItem(iceCube, 4))
+				.register();
 
 		kitchen = new Kitchen(this);
 
-		registerBerry("GRAPE", "Виноград", "Виноградный куст", "Виноградный сок", "Виноградный смузи", "Виноградный сэндвич", "Виноградный пирог", "&c", Color.RED, PlantType.BUSH, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmVlOTc2NDliZDk5OTk1NTQxM2ZjYmYwYjI2OWM5MWJlNDM0MmIxMGQwNzU1YmFkN2ExN2U5NWZjZWZkYWIwIn19fQ=="));
-		registerBerry("BLUEBERRY", "Черника", "Черничный куст", "Черничный сок", "Черничный смузи", "Черничный сэндвич", "Черничный пирог", "&9", Color.BLUE, PlantType.BUSH, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTVhNWM0YTBhMTZkYWJjOWIxZWM3MmZjODNlMjNhYzE1ZDAxOTdkZTYxYjEzOGJhYmNhN2M4YTI5YzgyMCJ9fX0="));
-		registerBerry("ELDERBERRY", "Ягода бузины", "Куст ягоды бузины", "Сок из ягоды бузины", "Смузи из ягоды бузины", "Сэндвич из ягоды бузины", "Пирог из ягоды бузины", "&c", Color.FUCHSIA, PlantType.BUSH, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWU0ODgzYTFlMjJjMzI0ZTc1MzE1MWUyYWM0MjRjNzRmMWNjNjQ2ZWVjOGVhMGRiMzQyMGYxZGQxZDhiIn19fQ=="));
-		registerBerry("RASPBERRY", "Малина", "Малиновый куст", "Малиновый сок", "Малиновый смузи", "Малиновый сэндвич", "Малиновый пирог", "&d", Color.FUCHSIA, PlantType.BUSH, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODI2MmM0NDViYzJkZDFjNWJiYzhiOTNmMjQ4MmY5ZmRiZWY0OGE3MjQ1ZTFiZGIzNjFkNGE1NjgxOTBkOWI1In19fQ=="));
-		registerBerry("BLACKBERRY", "Ежевика", "Куст ежевики", "Сок из ежевики", "Смузи из ежевики", "Сэндвич из ежевики", "Пирог из ежевики", "&8", Color.GRAY, PlantType.BUSH, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjc2OWY4Yjc4YzQyZTI3MmE2NjlkNmU2ZDE5YmE4NjUxYjcxMGFiNzZmNmI0NmQ5MDlkNmEzZDQ4Mjc1NCJ9fX0="));
-		registerBerry("CRANBERRY", "Клюква", "Клюквенный куст", "Клюквенный сок", "Клюквенный смузи", "Клюквенный сэндвич", "Клюквенный пирог", "&c", Color.FUCHSIA, PlantType.BUSH, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDVmZTZjNzE4ZmJhNzE5ZmY2MjIyMzdlZDllYTY4MjdkMDkzZWZmYWI4MTRiZTIxOTJlOTY0M2UzZTNkNyJ9fX0="));
-		registerBerry("COWBERRY", "Брусника", "Брусничный куст", "Брусничный сок", "Брусничный смузи", "Брусничный сэндвич", "Брусничный пирог", "&c", Color.FUCHSIA, PlantType.BUSH, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTA0ZTU0YmYyNTVhYjBiMWM0OThjYTNhMGNlYWU1YzdjNDVmMTg2MjNhNWEwMmY3OGE3OTEyNzAxYTMyNDkifX19"));
-		registerBerry("STRAWBERRY", "Клубника", "Клубничный куст", "Клубничный сок", "Клубничный смузи", "Клубничный сэндвич", "Клубничный пирог", "&4", Color.FUCHSIA, PlantType.FRUIT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2JjODI2YWFhZmI4ZGJmNjc4ODFlNjg5NDQ0MTRmMTM5ODUwNjRhM2Y4ZjA0NGQ4ZWRmYjQ0NDNlNzZiYSJ9fX0="));
+		registerBerry("GRAPE", "Виноград", "Виноградный куст", "Виноградный сок", "Виноградный смузи", "Виноградный сэндвич", "Виноградный пирог", "&c", Color.RED, PlantType.BUSH, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmVlOTc2NDliZDk5OTk1NTQxM2ZjYmYwYjI2OWM5MWJlNDM0MmIxMGQwNzU1YmFkN2ExN2U5NWZjZWZkYWIwIn19fQ==");
+		registerBerry("BLUEBERRY", "Черника", "Черничный куст", "Черничный сок", "Черничный смузи", "Черничный сэндвич", "Черничный пирог", "&9", Color.BLUE, PlantType.BUSH, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTVhNWM0YTBhMTZkYWJjOWIxZWM3MmZjODNlMjNhYzE1ZDAxOTdkZTYxYjEzOGJhYmNhN2M4YTI5YzgyMCJ9fX0=");
+		registerBerry("ELDERBERRY", "Ягода бузины", "Куст ягоды бузины", "Сок из ягоды бузины", "Смузи из ягоды бузины", "Сэндвич из ягоды бузины", "Пирог из ягоды бузины", "&c", Color.FUCHSIA, PlantType.BUSH, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWU0ODgzYTFlMjJjMzI0ZTc1MzE1MWUyYWM0MjRjNzRmMWNjNjQ2ZWVjOGVhMGRiMzQyMGYxZGQxZDhiIn19fQ==");
+		registerBerry("RASPBERRY", "Малина", "Малиновый куст", "Малиновый сок", "Малиновый смузи", "Малиновый сэндвич", "Малиновый пирог", "&d", Color.FUCHSIA, PlantType.BUSH, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODI2MmM0NDViYzJkZDFjNWJiYzhiOTNmMjQ4MmY5ZmRiZWY0OGE3MjQ1ZTFiZGIzNjFkNGE1NjgxOTBkOWI1In19fQ==");
+		registerBerry("BLACKBERRY", "Ежевика", "Куст ежевики", "Сок из ежевики", "Смузи из ежевики", "Сэндвич из ежевики", "Пирог из ежевики", "&8", Color.GRAY, PlantType.BUSH, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjc2OWY4Yjc4YzQyZTI3MmE2NjlkNmU2ZDE5YmE4NjUxYjcxMGFiNzZmNmI0NmQ5MDlkNmEzZDQ4Mjc1NCJ9fX0=");
+		registerBerry("CRANBERRY", "Клюква", "Клюквенный куст", "Клюквенный сок", "Клюквенный смузи", "Клюквенный сэндвич", "Клюквенный пирог", "&c", Color.FUCHSIA, PlantType.BUSH, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDVmZTZjNzE4ZmJhNzE5ZmY2MjIyMzdlZDllYTY4MjdkMDkzZWZmYWI4MTRiZTIxOTJlOTY0M2UzZTNkNyJ9fX0=");
+		registerBerry("COWBERRY", "Брусника", "Брусничный куст", "Брусничный сок", "Брусничный смузи", "Брусничный сэндвич", "Брусничный пирог", "&c", Color.FUCHSIA, PlantType.BUSH, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTA0ZTU0YmYyNTVhYjBiMWM0OThjYTNhMGNlYWU1YzdjNDVmMTg2MjNhNWEwMmY3OGE3OTEyNzAxYTMyNDkifX19");
+		registerBerry("STRAWBERRY", "Клубника", "Клубничный куст", "Клубничный сок", "Клубничный смузи", "Клубничный сэндвич", "Клубничный пирог", "&4", Color.FUCHSIA, PlantType.FRUIT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2JjODI2YWFhZmI4ZGJmNjc4ODFlNjg5NDQ0MTRmMTM5ODUwNjRhM2Y4ZjA0NGQ4ZWRmYjQ0NDNlNzZiYSJ9fX0=");
 
-		registerPlant("TOMATO", "Помидорный росток", "Помидор", "&4", PlantType.FRUIT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTkxNzIyMjZkMjc2MDcwZGMyMWI3NWJhMjVjYzJhYTU2NDlkYTVjYWM3NDViYTk3NzY5NWI1OWFlYmQifX19"));
-		registerPlant("LETTUCE", "Салатовый росток", "Салат", "&2", PlantType.FRUIT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDc3ZGQ4NDJjOTc1ZDhmYjAzYjFhZGQ2NmRiODM3N2ExOGJhOTg3MDUyMTYxZjIyNTkxZTZhNGVkZTdmNSJ9fX0="));
-		registerPlant("TEA_LEAF", "Росток чайного листа", "Чайный лист", "&a", PlantType.DOUBLE_PLANT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTUxNGM4YjQ2MTI0N2FiMTdmZTM2MDZlNmUyZjRkMzYzZGNjYWU5ZWQ1YmVkZDAxMmI0OThkN2FlOGViMyJ9fX0="));
-		registerPlant("CABBAGE", "Капустный росток", "Капуста", "&2",  PlantType.FRUIT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmNkNmQ2NzMyMGM5MTMxYmU4NWExNjRjZDdjNWZjZjI4OGYyOGMyODE2NTQ3ZGIzMGEzMTg3NDE2YmRjNDViIn19fQ=="));
-		registerPlant("SWEET_POTATO", "Росток сладкой картошки", "Сладкая картошка", "&6",  PlantType.FRUIT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2ZmNDg1NzhiNjY4NGUxNzk5NDRhYjFiYzc1ZmVjNzVmOGZkNTkyZGZiNDU2ZjZkZWY3NjU3NzEwMWE2NiJ9fX0="));
-		registerPlant("MUSTARD_SEED", "Росток горчичного семени", "Горчичное семя", "&e",  PlantType.FRUIT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWQ1M2E0MjQ5NWZhMjdmYjkyNTY5OWJjM2U1ZjI5NTNjYzJkYzMxZDAyN2QxNGZjZjdiOGMyNGI0NjcxMjFmIn19fQ=="));
-		registerPlant("CURRY_LEAF", "Росток листьев карри", "Лист карри", "&2",  PlantType.DOUBLE_PLANT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzJhZjdmYThiZGYzMjUyZjY5ODYzYjIwNDU1OWQyM2JmYzJiOTNkNDE0MzcxMDM0MzdhYjE5MzVmMzIzYTMxZiJ9fX0="));
-		registerPlant("ONION", "Росток лука", "Лук", "&c",  PlantType.FRUIT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNlMDM2ZTMyN2NiOWQ0ZDhmZWYzNjg5N2E4OTYyNGI1ZDliMThmNzA1Mzg0Y2UwZDdlZDFlMWZjN2Y1NiJ9fX0="));
-		registerPlant("GARLIC", "Чесночный росток", "Чеснок", "&r",  PlantType.FRUIT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzA1MmQ5YzExODQ4ZWJjYzlmODM0MDMzMjU3N2JmMWQyMmI2NDNjMzRjNmFhOTFmZTRjMTZkNWE3M2Y2ZDgifX19"));
-		registerPlant("CILANTRO", "Росток кориандра", "Кориандр", "&a",  PlantType.DOUBLE_PLANT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTYxNDkxOTZmM2E4ZDZkNmYyNGU1MWIyN2U0Y2I3MWM2YmFiNjYzNDQ5ZGFmZmI3YWEyMTFiYmU1NzcyNDIifX19"));
-		registerPlant("BLACK_PEPPER", "Росток чёрного перца", "Чёрный перец", "&8",  PlantType.DOUBLE_PLANT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjM0MmI5YmY5ZjFmNjI5NTg0MmIwZWZiNTkxNjk3YjE0NDUxZjgwM2ExNjVhZTU4ZDBkY2ViZDk4ZWFjYyJ9fX0="));
+		registerPlant("TOMATO", "Помидорный росток", "Помидор", "&4", PlantType.FRUIT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTkxNzIyMjZkMjc2MDcwZGMyMWI3NWJhMjVjYzJhYTU2NDlkYTVjYWM3NDViYTk3NzY5NWI1OWFlYmQifX19");
+		registerPlant("LETTUCE", "Салатовый росток", "Салат", "&2", PlantType.FRUIT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDc3ZGQ4NDJjOTc1ZDhmYjAzYjFhZGQ2NmRiODM3N2ExOGJhOTg3MDUyMTYxZjIyNTkxZTZhNGVkZTdmNSJ9fX0=");
+		registerPlant("TEA_LEAF", "Росток чайного листа", "Чайный лист", "&a", PlantType.DOUBLE_PLANT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTUxNGM4YjQ2MTI0N2FiMTdmZTM2MDZlNmUyZjRkMzYzZGNjYWU5ZWQ1YmVkZDAxMmI0OThkN2FlOGViMyJ9fX0=");
+		registerPlant("CABBAGE", "Капустный росток", "Капуста", "&2",  PlantType.FRUIT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmNkNmQ2NzMyMGM5MTMxYmU4NWExNjRjZDdjNWZjZjI4OGYyOGMyODE2NTQ3ZGIzMGEzMTg3NDE2YmRjNDViIn19fQ==");
+		registerPlant("SWEET_POTATO", "Росток сладкой картошки", "Сладкая картошка", "&6",  PlantType.FRUIT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2ZmNDg1NzhiNjY4NGUxNzk5NDRhYjFiYzc1ZmVjNzVmOGZkNTkyZGZiNDU2ZjZkZWY3NjU3NzEwMWE2NiJ9fX0=");
+		registerPlant("MUSTARD_SEED", "Росток горчичного семени", "Горчичное семя", "&e",  PlantType.FRUIT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWQ1M2E0MjQ5NWZhMjdmYjkyNTY5OWJjM2U1ZjI5NTNjYzJkYzMxZDAyN2QxNGZjZjdiOGMyNGI0NjcxMjFmIn19fQ==");
+		registerPlant("CURRY_LEAF", "Росток листьев карри", "Лист карри", "&2",  PlantType.DOUBLE_PLANT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzJhZjdmYThiZGYzMjUyZjY5ODYzYjIwNDU1OWQyM2JmYzJiOTNkNDE0MzcxMDM0MzdhYjE5MzVmMzIzYTMxZiJ9fX0=");
+		registerPlant("ONION", "Росток лука", "Лук", "&c",  PlantType.FRUIT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNlMDM2ZTMyN2NiOWQ0ZDhmZWYzNjg5N2E4OTYyNGI1ZDliMThmNzA1Mzg0Y2UwZDdlZDFlMWZjN2Y1NiJ9fX0=");
+		registerPlant("GARLIC", "Чесночный росток", "Чеснок", "&r",  PlantType.FRUIT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzA1MmQ5YzExODQ4ZWJjYzlmODM0MDMzMjU3N2JmMWQyMmI2NDNjMzRjNmFhOTFmZTRjMTZkNWE3M2Y2ZDgifX19");
+		registerPlant("CILANTRO", "Росток кориандра", "Кориандр", "&a",  PlantType.DOUBLE_PLANT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTYxNDkxOTZmM2E4ZDZkNmYyNGU1MWIyN2U0Y2I3MWM2YmFiNjYzNDQ5ZGFmZmI3YWEyMTFiYmU1NzcyNDIifX19");
+		registerPlant("BLACK_PEPPER", "Росток чёрного перца", "Чёрный перец", "&8",  PlantType.DOUBLE_PLANT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjM0MmI5YmY5ZjFmNjI5NTg0MmIwZWZiNTkxNjk3YjE0NDUxZjgwM2ExNjVhZTU4ZDBkY2ViZDk4ZWFjYyJ9fX0=");
 
-		registerPlant("CORN", "Кукурузный росток", "Кукуруза", "&6",  PlantType.DOUBLE_PLANT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWJkMzgwMmU1ZmFjMDNhZmFiNzQyYjBmM2NjYTQxYmNkNDcyM2JlZTkxMWQyM2JlMjljZmZkNWI5NjVmMSJ9fX0="));
-		registerPlant("PINEAPPLE", "Ананасовый росток", "Ананас", "&6",  PlantType.DOUBLE_PLANT, new PlantData("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDdlZGRkODJlNTc1ZGZkNWI3NTc5ZDg5ZGNkMjM1MGM5OTFmMDQ4M2E3NjQ3Y2ZmZDNkMmM1ODdmMjEifX19"));
+		registerPlant("CORN", "Кукурузный росток", "Кукуруза", "&6",  PlantType.DOUBLE_PLANT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWJkMzgwMmU1ZmFjMDNhZmFiNzQyYjBmM2NjYTQxYmNkNDcyM2JlZTkxMWQyM2JlMjljZmZkNWI5NjVmMSJ9fX0=");
+		registerPlant("PINEAPPLE", "Ананасовый росток", "Ананас", "&6",  PlantType.DOUBLE_PLANT, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDdlZGRkODJlNTc1ZGZkNWI3NTc5ZDg5ZGNkMjM1MGM5OTFmMDQ4M2E3NjQ3Y2ZmZDNkMmM1ODdmMjEifX19");
 
 		registerTree("OAK_APPLE", "Яблочное", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2JiMzExZjNiYTFjMDdjM2QxMTQ3Y2QyMTBkODFmZTExZmQ4YWU5ZTNkYjIxMmEwZmE3NDg5NDZjMzYzMyJ9fX0=", "Яблоко", "&c", Color.FUCHSIA, "Яблочный сок", "Яблочный пирог", Material.DIRT, Material.GRASS_BLOCK);
 		registerTree("COCONUT", "Кокосовое", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmQyN2RlZDU3Yjk0Y2Y3MTViMDQ4ZWY1MTdhYjNmODViZWY1YTdiZTY5ZjE0YjE1NzNlMTRlN2U0MmUyZTgifX19", "Кокос", "&6", Color.MAROON, "Кокосовое молоко", null, Material.SAND);
@@ -700,7 +696,7 @@ public class ExoticGarden extends JavaPlugin {
 	}
 
 	public void registerTree(String id, String name, String texture, String fruitName, String color, Color pcolor, String juiceName, String pieName, Material... soil) {
-		Tree tree = new Tree(fruitName, id, texture, soil);
+		Tree tree = new Tree(id, texture, soil);
 		trees.add(tree);
 
 		SlimefunItemStack sfi = new SlimefunItemStack(id + "_SAPLING", Material.OAK_SAPLING, color + name + " деревце");
@@ -711,13 +707,9 @@ public class ExoticGarden extends JavaPlugin {
 		new ItemStack[] {null, null, null, null, new ItemStack(Material.GRASS), null, null, null, null})
 		.register();
 
-		try {
-			new EGPlant(category_main, new SlimefunItemStack(id, texture, color + fruitName), new RecipeType(new CustomItem(Material.OAK_LEAVES, "&7Выпадает с листвы соответствующего дерева")), true,
-			new ItemStack[] {null, null, null, null, getItem(id + "_SAPLING"), null, null, null, null})
-			.register();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+		new EGPlant(category_main, new SlimefunItemStack(id, texture, color + fruitName), new RecipeType(new CustomItem(Material.OAK_LEAVES, "&7Выпадает с листвы соответствующего дерева")), true,
+		new ItemStack[] {null, null, null, null, getItem(id + "_SAPLING"), null, null, null, null})
+		.register();
 
 		if (pcolor != null) {
 			new Juice(category_drinks, new SlimefunItemStack(id + "_JUICE", new CustomPotion(color + juiceName, pcolor, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&oВосстанавливает &b&o" + "3.0 единицы" + " &7&oголода")), RecipeType.JUICER,
@@ -726,22 +718,18 @@ public class ExoticGarden extends JavaPlugin {
 		}
 
 		if (pieName != null) {
-			try {
-				new CustomFood(category_food, new SlimefunItemStack(id + "_PIE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQxOGM2YjBhMjlmYzFmZTc5MWM4OTc3NGQ4MjhmZjYzZDJhOWZhNmM4MzM3M2VmM2FhNDdiZjNlYjc5In19fQ==", color + pieName, "", "&7&oВосстанавливает &b&o" + "6.5 единиц" + " &7&oголода"),
-				new ItemStack[] {getItem(id), new ItemStack(Material.EGG), new ItemStack(Material.SUGAR), new ItemStack(Material.MILK_BUCKET), SlimefunItems.WHEAT_FLOUR, null, null, null, null},
-				13)
-				.register();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			new CustomFood(category_food, new SlimefunItemStack(id + "_PIE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQxOGM2YjBhMjlmYzFmZTc5MWM4OTc3NGQ4MjhmZjYzZDJhOWZhNmM4MzM3M2VmM2FhNDdiZjNlYjc5In19fQ==", color + pieName, "", "&7&oВосстанавливает &b&o" + "6.5 единиц" + " &7&oголода"),
+			new ItemStack[] {getItem(id), new ItemStack(Material.EGG), new ItemStack(Material.SUGAR), new ItemStack(Material.MILK_BUCKET), SlimefunItems.WHEAT_FLOUR, null, null, null, null},
+			13)
+			.register();
 		}
 
 		if (!new File("plugins/ExoticGarden/schematics", id + "_TREE.schematic").exists())
 			saveResource("schematics/" + id + "_TREE.schematic", false);
 	}
 
-	public void registerBerry(String id, String name, String bushName, String juiceName, String smoothieName, String sandwichName, String pieName, String color, Color pcolor, PlantType type, PlantData data) {
-		Berry berry = new Berry(id, type, data);
+	public void registerBerry(String id, String name, String bushName, String juiceName, String smoothieName, String sandwichName, String pieName, String color, Color pcolor, PlantType type, String texture) {
+		Berry berry = new Berry(id, type, texture);
 		berries.add(berry);
 
 		SlimefunItemStack sfi = new SlimefunItemStack(id + "_BUSH", Material.OAK_SAPLING, color + bushName);
@@ -752,7 +740,7 @@ public class ExoticGarden extends JavaPlugin {
 		new ItemStack[] {null, null, null, null, new ItemStack(Material.GRASS), null, null, null, null})
 		.register();
 
-		new EGPlant(category_main, new SlimefunItemStack(id, data.getTexture(), color + name), new RecipeType(new CustomItem(Material.OAK_LEAVES, "&7Добывается при сборе соответствующего куста")), true,
+		new EGPlant(category_main, new SlimefunItemStack(id, texture, color + name), new RecipeType(new CustomItem(Material.OAK_LEAVES, "&7Добывается при сборе соответствующего куста")), true,
 		new ItemStack[] {null, null, null, null, getItem(id + "_BUSH"), null, null, null, null})
 		.register();
 
@@ -764,19 +752,15 @@ public class ExoticGarden extends JavaPlugin {
 		new ItemStack[] {getItem(id + "_JUICE"), getItem("ICE_CUBE"), null, null, null, null, null, null, null})
 		.register();
 
-		try {
-			new CustomFood(category_food, new SlimefunItemStack(id + "_JELLY_SANDWICH", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGM4YTkzOTA5M2FiMWNkZTY2NzdmYWY3NDgxZjMxMWU1ZjE3ZjYzZDU4ODI1ZjBlMGMxNzQ2MzFmYjA0MzkifX19", color + sandwichName, "", "&7&oВосстанавливает &b&o" + "8.0 единиц" + " &7&oголода"),
-			new ItemStack[] {null, new ItemStack(Material.BREAD), null, null, getItem(id + "_JUICE"), null, null, new ItemStack(Material.BREAD), null},
-			16)
-			.register();
+		new CustomFood(category_food, new SlimefunItemStack(id + "_JELLY_SANDWICH", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGM4YTkzOTA5M2FiMWNkZTY2NzdmYWY3NDgxZjMxMWU1ZjE3ZjYzZDU4ODI1ZjBlMGMxNzQ2MzFmYjA0MzkifX19", color + sandwichName, "", "&7&oВосстанавливает &b&o" + "8.0 единиц" + " &7&oголода"),
+		new ItemStack[] {null, new ItemStack(Material.BREAD), null, null, getItem(id + "_JUICE"), null, null, new ItemStack(Material.BREAD), null},
+		16)
+		.register();
 
-			new CustomFood(category_food, new SlimefunItemStack(id + "_PIE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQxOGM2YjBhMjlmYzFmZTc5MWM4OTc3NGQ4MjhmZjYzZDJhOWZhNmM4MzM3M2VmM2FhNDdiZjNlYjc5In19fQ==", color + pieName, "", "&7&oВосстанавливает &b&o" + "6.5 единиц" + " &7&oголода"),
-			new ItemStack[] {getItem(id), new ItemStack(Material.EGG), new ItemStack(Material.SUGAR), new ItemStack(Material.MILK_BUCKET), SlimefunItems.WHEAT_FLOUR, null, null, null, null},
-			13)
-			.register();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		new CustomFood(category_food, new SlimefunItemStack(id + "_PIE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQxOGM2YjBhMjlmYzFmZTc5MWM4OTc3NGQ4MjhmZjYzZDJhOWZhNmM4MzM3M2VmM2FhNDdiZjNlYjc5In19fQ==", color + pieName, "", "&7&oВосстанавливает &b&o" + "6.5 единиц" + " &7&oголода"),
+		new ItemStack[] {getItem(id), new ItemStack(Material.EGG), new ItemStack(Material.SUGAR), new ItemStack(Material.MILK_BUCKET), SlimefunItems.WHEAT_FLOUR, null, null, null, null},
+		13)
+		.register();
 	}
 
 	private static ItemStack getItem(String id) {
@@ -784,8 +768,8 @@ public class ExoticGarden extends JavaPlugin {
 		return item != null ? item.getItem() : null;
 	}
 
-	public void registerPlant(String id, String name, String plantName, String color, PlantType type, PlantData data) {
-		Berry berry = new Berry(id, type, data);
+	public void registerPlant(String id, String name, String plantName, String color, PlantType type, String texture) {
+		Berry berry = new Berry(id, type, texture);
 		berries.add(berry);
 
 		SlimefunItemStack sfi = new SlimefunItemStack(id + "_BUSH", Material.OAK_SAPLING, color + name);
@@ -796,15 +780,15 @@ public class ExoticGarden extends JavaPlugin {
 		new ItemStack[] {null, null, null, null, new ItemStack(Material.GRASS), null, null, null, null})
 		.register();
 
-		new EGPlant(category_main, new SlimefunItemStack(id, data.getTexture(), color + plantName), new RecipeType(new CustomItem(Material.OAK_LEAVES, "&7Добывается при сборе соответствующего куста")), true,
+		new EGPlant(category_main, new SlimefunItemStack(id, texture, color + plantName), new RecipeType(new CustomItem(Material.OAK_LEAVES, "&7Добывается при сборе соответствующего куста")), true,
 		new ItemStack[] {null, null, null, null, getItem(id + "_BUSH"), null, null, null, null})
 		.register();
 	}
 
-	public void registerMagicalPlant(String id, String name, String plantName, ItemStack item, String skull, ItemStack[] recipe) {
+	public void registerMagicalPlant(String id, String name, String plantName, ItemStack item, String texture, ItemStack[] recipe) {
 		SlimefunItemStack essence = new SlimefunItemStack(id + "_ESSENCE", Material.BLAZE_POWDER, "&rМагическая эссенция", "", "&7Элемент: &o" + name);
 
-		Berry berry = new Berry(essence, id + "_ESSENCE", PlantType.ORE_PLANT, new PlantData(skull));
+		Berry berry = new Berry(essence, id + "_ESSENCE", PlantType.ORE_PLANT, texture);
 		berries.add(berry);
 
 		new SlimefunItem(category_magic, new SlimefunItemStack(id + "_PLANT", Material.OAK_SAPLING, "&r" + plantName), RecipeType.ENHANCED_CRAFTING_TABLE,
